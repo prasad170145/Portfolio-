@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Durga Prasad Devandla - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --text-color: #f8fafc;
+      --accent-color: #22d3ee;
+      --secondary-color: #94a3b8;
+      --heading-color: #3b82f6;
+      --project-bg: #0f172a;
+      --section-bg: #1e293b;
+      --project-text: #f1f5f9;
+      --nav-link-hover-bg: #22d3ee;
+      --nav-link-hover-color: #0f172a;
+      --button-bg: #22d3ee;
+      --button-color: #0f172a;
+    }
+
+    body.light {
+      --bg-color: #f8fafc;
+      --text-color: #0f172a;
+      --accent-color: #0284c7;
+      --secondary-color: #64748b;
+      --heading-color: #2563eb;
+      --project-bg: #e2e8f0;
+      --section-bg: #cbd5e1;
+      --project-text: #0f172a;
+      --nav-link-hover-bg: #0284c7;
+      --nav-link-hover-color: #f8fafc;
+      --button-bg: #0284c7;
+      --button-color: #f8fafc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body, html {
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Poppins', sans-serif;
+      padding: 20px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      z-index: 1000;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-color);
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 8px 15px;
+      border-radius: 6px;
+      /* REMOVE all general transitions from nav a */
+      /* transition: all 0.3s ease; <-- REMOVE THIS LINE */
+    }
+    nav a:hover {
+      background-color: var(--nav-link-hover-bg);
+      color: var(--nav-link-hover-color);
+      transform: scale(1.05);
+      transition: all 0.3s ease; /* Keep transition ONLY for hover effect */
+    }
+
+    .mode-toggle {
+      cursor: pointer;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      padding: 8px;
+      border-radius: 6px;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .mode-toggle:hover {
+      background-color: var(--nav-link-hover-bg);
+      color: var(--nav-link-hover-color);
+      border-color: var(--nav-link-hover-bg);
+      transform: scale(1.1);
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+    }
+    /* HOME SECTION - ANIMATION ON PAGE LOAD */
+    h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--heading-color);
+      white-space: nowrap;
+      transition: color 0.3s ease;
+      opacity: 0;
+      animation: fadeSlideUp 1s ease 0.5s forwards;
+    }
+    .container p { /* Target both p tags within container */
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--secondary-color);
+      margin-bottom: 1.8rem;
+      transition: color 0.3s ease;
+    }
+
+    .container p:first-of-type {
+      opacity: 0;
+      animation: fadeSlideUp 1s ease forwards;
+    }
+
+    .container p:nth-of-type(2) {
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .social-icons a {
+      color: var(--text-color);
+      font-size: 2rem;
+      transition: 0.3s ease;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: popIn 0.5s ease forwards;
+    }
+    .social-icons a:nth-child(1) {
+      animation-delay: 1.5s;
+    }
+    .social-icons a:nth-child(2) {
+      animation-delay: 1.8s;
+    }
+    /* END HOME SECTION ANIMATION */
+
+
+    #projects {
+      padding: 60px 20px;
+      background-color: var(--section-bg);
+      color: var(--project-text);
+      text-align: center;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #projects h2 {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 30px;
+      transition: color 0.3s ease;
+    }
+
+    .project-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .project-item {
+      background-color: var(--project-bg);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    .project-item h3 {
+      color: var(--heading-color);
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .project-item p {
+      margin-bottom: 15px;
+    }
+
+    .project-item a {
+      color: var(--accent-color);
+      text-decoration: underline;
+      font-weight: 600;
+      margin-right: 15px;
+      display: inline-block;
+      padding: 6px 12px;
+      border: 2px solid var(--accent-color);
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .project-item a:hover {
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      text-decoration: underline;
+    }
+
+    .contact-icons a {
+      color: var(--text-color);
+      font-size: 2rem;
+      margin: 0 15px;
+      transition: 0.3s ease;
+    }
+
+    .contact-icons a:hover {
+      color: var(--accent-color);
+      transform: scale(1.2);
+    }
+
+    .send-email-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: var(--button-bg);
+      color: var(--button-color);
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .send-email-btn:hover {
+      background-color: var(--bg-color);
+      color: var(--accent-color);
+      border: 2px solid var(--accent-color);
+    }
+
+    /* Keyframes for Home Section Load Animations */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Skills Section Animation - now using transition */
+    .skill-item { /* Target specific skill items */
+      opacity: 0;
+      transform: translateY(30px) scale(0.9);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .skill-item.animated {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Project Cards Animation - now using transition */
+    .project-item {
+      opacity: 0;
+      transform: translateX(-40px) scale(0.95);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .project-item.animated {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    /* New animation for navigation clicks */
+    @keyframes navLinkClick {
+      0% {
+        /* Start from current hovered state if applicable, or default */
+        transform: scale(1.05); /* Matches hover scale */
+        background-color: var(--nav-link-hover-bg);
+        color: var(--nav-link-hover-color);
+      }
+      50% {
+        transform: scale(1.08); /* Slightly larger pop */
+        background-color: var(--accent-color); /* Stronger highlight */
+        color: var(--bg-color);
+      }
+      100% {
+        transform: scale(1.05); /* Return to hover state */
+        background-color: var(--nav-link-hover-bg);
+        color: var(--nav-link-hover-color);
+      }
+    }
+
+    .nav-link-clicked {
+      animation: navLinkClick 0.3s ease-in-out forwards;
+      /* Force styles to ensure animation plays cleanly */
+      background-color: var(--nav-link-hover-bg) !important;
+      color: var(--nav-link-hover-color) !important;
+      transform: scale(1.05) !important;
+      /* Also remove any general transition here if it's interfering */
+      transition: none !important; /* Crucial: ensures no transition interferes with animation */
+    }
+
+    /* General animation classes for sections */
+    .animate-section {
+      opacity: 0;
+      transform: translateY(50px); /* Initial position for sections */
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .animate-section.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <div class="mode-toggle" id="modeToggle" title="Toggle light/dark mode" aria-label="Toggle light/dark mode" role="button" tabindex="0">
+      <i class="fas fa-moon"></i>
+    </div>
+  </nav>
+
+  <div class="container" id="home">
+    <p>HEY I'M</p>
+    <h1>DURGA PRASAD DEVANDLA</h1>
+    <p>
+      I'm a Web Developer who loves building clean, responsive, and user-friendly websites.
+      I enjoy turning ideas into real-world web solutions using modern tools and technologies.
+    </p>
+    <div class="social-icons">
+      <a href="https://github.com/prasad170145" target="_blank" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/durga-prasad-devandla-617a9b2a4/" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </div>
+  </div>
+
+  <section id="skills" class="animate-section" style="padding: 60px 20px; background-color: var(--bg-color); color: var(--text-color); text-align: center;">
+    <h2 style="color: var(--heading-color); font-size: 2.5rem; margin-bottom: 30px;">My Skills</h2>
+
+    <h3 style="color: var(--accent-color); font-size: 1.8rem; margin-top: 30px; margin-bottom: 20px;">Languages</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; margin: 0 auto;">
+
+        <div class="skill-item" style="display: flex; align-items: center; gap: 10px; background-color: var(--section-bg); padding: 12px 20px; border-radius: 25px; font-weight: 600;">
+            <i class="fab fa-html5" style="color: #e34c26;"></i> HTML
+        </div>
+
+        <div class="skill-item" style="display: flex; align-items: center; gap: 10px; background-color: var(--section-bg); padding: 12px 20px; border-radius: 25px; font-weight: 600;">
+            <i class="fab fa-css3-alt" style="color: #264de4;"></i> CSS
+        </div>
+
+        <div class="skill-item" style="display: flex; align-items: center; gap: 10px; background-color: var(--section-bg); padding: 12px 20px; border-radius: 25px; font-weight: 600;">
+            <i class="fab fa-js-square" style="color: #f0db4f;"></i> JavaScript
+        </div>
+
+        <div class="skill-item" style="display: flex; align-items: center; gap: 10px; background-color: var(--section-bg); padding: 12px 20px; border-radius: 25px; font-weight: 600;">
+            <i class="fab fa-python" style="color: #306998;"></i> Python
+        </div>
+
+    </div>
+
+    <h3 style="color: var(--accent-color); font-size: 1.8rem; margin-top: 40px; margin-bottom: 20px;">Frameworks</h3>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; max-width: 900px; margin: 0 auto;">
+
+        <div class="skill-item" style="display: flex; align-items: center; gap: 10px; background-color: var(--section-bg); padding: 12px 20px; border-radius: 25px; font-weight: 600;">
+            <i class="fas fa-flask" style="color: #16a34a;"></i>Python with Flask
+        </div>
+
+    </div>
+</section>
+
+
+  <section id="projects" class="animate-section">
+    <h2>My Projects</h2>
+    <div class="project-list">
+      <div class="project-item">
+        <h3>Automated Students Results System</h3>
+        <p>A web app where faculty can upload a .csv file of student marks, and it automatically sends personalized result emails with charts to each student's email ID.</p>
+        <a href="https://mail-guqq.onrender.com/" target="_blank" rel="noopener noreferrer">View Live</a>
+        <a href="https://github.com/prasad170145" target="_blank" rel="noopener noreferrer">View Code</a>
+      </div>
+      <div class="project-item">
+        <h3>Portfolio</h3>
+        <p>A clean and responsive portfolio hosted on GitHub Pages.</p>
+        <a href="https://github.com/prasad170145" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="animate-section" style="padding: 60px 20px; text-align: center;">
+    <h2 style="color: var(--accent-color); font-size: 2.5rem;">Let's Contact!</h2><br><br>
+    <p style="color: var(--secondary-color); font-size: 1.2rem;">
+      Email: <strong style="color: var(--text-color);">dpnpdevandla@gmail.com</strong>
+    </p>
+    <a href="mailto:dpnpdevandla@gmail.com" class="send-email-btn">Send Email</a>
+    <div class="contact-icons" style="margin-top: 25px;">
+      <a href="https://github.com/prasad170145" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/durga-prasad-devandla-617a9b2a4/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <footer style="text-align: center; padding: 20px 0; color: var(--secondary-color); font-size: 0.9rem; user-select: none;"><br><br>
+      Made by Prasad Devandla. All rights reserved.
+    </footer>
+  </section>
+
+  <script>
+    const modeToggle = document.getElementById('modeToggle');
+    const body = document.body;
+    const icon = modeToggle.querySelector('i');
+    const navLinks = document.querySelectorAll('nav a'); // Get all navigation links
+
+    // Set initial theme based on local storage
+    if(localStorage.getItem('theme') === 'light'){
+      body.classList.add('light');
+      icon.classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Toggle theme on click/keydown
+    modeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      if(body.classList.contains('light')){
+        icon.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('theme', 'light');
+      } else {
+        icon.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    modeToggle.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        modeToggle.click();
+      }
+    });
+
+    // Add click animation to navigation links
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        // Remove class from any previously clicked link
+        navLinks.forEach(l => l.classList.remove('nav-link-clicked'));
+        
+        // Add class to the clicked link
+        const clickedLink = this;
+        // Use a tiny timeout to ensure re-rendering happens before class addition
+        // This can sometimes help trigger the animation when styles are already applied.
+        setTimeout(() => {
+            clickedLink.classList.add('nav-link-clicked');
+        }, 50); // A small delay to ensure CSS styles are ready before animation starts
+
+        // Remove the class after the animation completes
+        clickedLink.addEventListener('animationend', function() {
+            clickedLink.classList.remove('nav-link-clicked');
+        }, { once: true });
+      });
+    });
+
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.2 // Trigger when 20% of the element is visible
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Element is in view, add 'animated' class
+                entry.target.classList.add('animated');
+            } else {
+                // Element is out of view, remove 'animated' class to re-animate on scroll
+                entry.target.classList.remove('animated');
+            }
+        });
+    }, observerOptions);
+
+    // Observe main sections (Skills, Projects, Contact) for scroll-in animation
+    document.querySelectorAll('#skills.animate-section, #projects.animate-section, #contact.animate-section').forEach(section => {
+        scrollObserver.observe(section);
+    });
+
+    // Observe individual skill items within the skills section for scroll-in animation
+    document.querySelectorAll('#skills .skill-item').forEach(skillItem => {
+        scrollObserver.observe(skillItem);
+    });
+
+    // Observe individual project items within the projects section for scroll-in animation
+    document.querySelectorAll('.project-item').forEach(projectItem => {
+        scrollObserver.observe(projectItem);
+    });
+
+  </script>
+
+</body>
+</html>
